@@ -1,0 +1,74 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+iris = pd.read_csv("/kaggle/input/irisss/iris.csv")
+iris.head()
+iris.shape
+
+iris.info()
+
+iris["variety"].unique()
+iris["variety"].unique()
+
+iris.isna().sum()
+iris.describe()
+
+iris_setosa = iris[iris.variety=="Setosa"]
+iris_Versicolor = iris[iris.variety=="Versicolor"]
+iris_Virginica = iris[iris.variety=="Virginica"]
+
+sns.set_style("whitegrid")
+sns.countplot(x='variety', data=iris)
+plt.xlabel("Species")
+plt.show()
+
+sns.set_style("darkgrid")
+sns.scatterplot(x='sepal.length', y='sepal.width', hue='variety', data=iris)
+plt.xlabel("sepal length (cm)")
+plt.ylabel("sepal width (cm)")
+plt.title("Sepal Length vs Sepal Width")
+plt.show()
+
+
+sns.set_style("darkgrid")
+sns.scatterplot(x='petal.length', y='petal.width', hue='variety', data=iris)
+plt.xlabel("petal length (cm)")
+plt.ylabel("petal width (cm)")
+plt.title("Petal Length vs Petal Width")
+plt.show()
+
+sns.set_style("darkgrid")
+sns.pairplot(data=iris,hue="variety")
+plt.show()
+
+sns.set_style("whitegrid")
+sns.displot(x=iris["sepal.length"],data=iris,hue="variety")
+plt.xlabel("sepal length (cm)")
+plt.title("Distribution of Sepal length")
+plt.show()
+
+sns.set_style("whitegrid")
+sns.displot(x=iris["petal.length"],data=iris,hue="variety")
+plt.xlabel("petal length (cm)")
+plt.title("Distribution of Petal Length")
+plt.show()
+
+sns.set_style("whitegrid")
+sns.boxplot(x="variety",y="sepal.length",data=iris,hue="variety")
+plt.xlabel("Species")
+plt.ylabel("sepal length (cm)")
+plt.title("Box Plot on Sepal Length")
+plt.show()
+
+sns.set_style("whitegrid")
+sns.boxplot(x="variety",y="petal.length",data=iris,hue="variety")
+plt.xlabel("Species")
+plt.ylabel("petal length (cm)")
+plt.title("Box Plot on Petal Length")
+plt.show()
+
+x = iris.drop("variety",axis="columns")
+sns.heatmap(x.corr(),annot=True)
+plt.title("Correlation Heatmap")
+
